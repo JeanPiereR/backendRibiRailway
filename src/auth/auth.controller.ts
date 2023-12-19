@@ -51,8 +51,6 @@ export class AuthController {
   ){
 
     return{
-      ok: true,
-      message: "holiwi",
       user,
       userEmail,
       rawHeaders,
