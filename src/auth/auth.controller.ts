@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
@@ -8,6 +8,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from './entities/user.entity';
 import { ValidRoles } from './interfaces/valid-roles';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 
 @Controller('auth')
@@ -72,6 +73,12 @@ export class AuthController {
       ok: true,
       user
     }
+  }
+
+  @Get('users') //TODO PART 2 DE PRUEBA
+  @Auth()
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.authService.findAll( paginationDto );
   }
 
   

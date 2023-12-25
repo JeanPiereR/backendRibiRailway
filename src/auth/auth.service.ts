@@ -7,6 +7,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from './entities/user.entity';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 
 @Injectable()
@@ -98,7 +99,15 @@ export class AuthService {
 
 
 
+  async findAll ( paginationDto:PaginationDto ) { //TODO PART 1 DE PRUEBA
 
+    const { limit=10, offset=0 } = paginationDto;
+
+    return this.userRepository.find({
+      take: limit,
+      skip: offset,
+    })
+  }
 
 
   private handleDBErrors ( error: any ): never {
